@@ -6,7 +6,6 @@ export async function geocoding(placename) {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
     const { lat, lon } = data[0];
     getWeatherData(lat, lon);
   } catch {}
@@ -15,9 +14,7 @@ export async function geocoding(placename) {
 async function getWeatherData(lat, lon) {
   const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
   const response = await fetch(url);
-  console.log(response);
   const data = await response.json();
-  console.log(data);
 
   dailyForecast(data.current, data.daily);
 }

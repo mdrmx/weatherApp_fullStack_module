@@ -1,6 +1,6 @@
 import { initTitleBar } from "./components/titleBar.js";
 import { searchInput } from "./components/ui_components/searchInput.js";
-import { geocoding } from "./apiRouter.js";
+import { fetchWeather } from "./apiRouter.js";
 import "./style.css";
 
 function initApp() {
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const handleKeyInput = (event, inputElement) => {
   if (event.key === "Enter") {
     const query = inputElement.value.trim();
-    geocoding(query);
+    fetchWeather({ placename: query });
     inputElement.value = "";
   }
 };
@@ -52,6 +52,6 @@ const handleKeyInput = (event, inputElement) => {
 const handleButtonClick = (event, inputElement) => {
   const query = inputElement.value.trim();
   console.log(query);
-  geocoding(query);
+  fetchWeather({ placename: query });
   inputElement.value = "";
 };

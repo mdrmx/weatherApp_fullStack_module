@@ -1,6 +1,6 @@
 import { initTitleBar } from "./components/ui_components/titleBar.js";
 import { searchInput } from "./components/ui_components/searchInput.js";
-import { geocoding } from "./apiRouter.js";
+import { weatherApi } from "./apiRouter.js";
 import "./style.css";
 
 // Build the static page shell once the app container is available.
@@ -56,6 +56,7 @@ const handleButtonClick = (event, inputElement) => {
   // Submit the search when the search button is clicked.
   const query = inputElement.value.trim();
   console.log(query);
-  geocoding(query);
+  // geocoding(query);
+  weatherApi(query);
   inputElement.value = "";
 };

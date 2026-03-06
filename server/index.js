@@ -1,8 +1,14 @@
-import { dailyForecast } from "./components/ui_components/weatherTile.js";
-const apiKey = "b7888b07411ce564248053345ab0dbdd";
+import express from "express";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const app = express();
+const port = 3000;
+const apiKey = process.env.API_KEY;
 
 // Resolve a place name to coordinates, then fetch weather for the top match.
-export async function geocoding(placename) {
+async function geocoding(placename) {
   const url = `http://api.openweathermap.org/geo/1.0/direct?q=${placename}&limit=5&appid=${apiKey}`;
   try {
     const response = await fetch(url);
@@ -20,6 +26,16 @@ async function getWeatherData(lat, lon) {
   const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
   const response = await fetch(url);
   const data = await response.json();
-
-  dailyForecast(data.current, data.daily);
+  console.log(data);
 }
+
+app.get("/weather", (req, res) => {
+  console.log(req.query);
+  const { placename } = req.query;
+  geocoding(placename);
+  res.send({ messag: "weather API" });
+});
+
+app.listen(port, () => {
+  console.log(`server is running on http://localhost:${port} `);
+});

@@ -9,13 +9,14 @@ export function searchInput({ placeholder, onInputKeyPress, onButtonClick }) {
   search.placeholder = placeholder;
   search.id = "search-input";
 
-  //keycode detection
+  // Forward keyboard events to the parent callback with current input state.
   if (typeof onInputKeyPress === "function") {
     search.addEventListener("keypress", (event) => {
       onInputKeyPress(event, search);
     });
   }
-  //helper function for modular button functionality
+
+  // Build a reusable icon button with injected click behavior.
   function searchButton(onClick) {
     const button = document.createElement("button");
     button.id = "search-button";

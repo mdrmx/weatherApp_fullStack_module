@@ -1,8 +1,9 @@
-import { initTitleBar } from "./components/titleBar.js";
+import { initTitleBar } from "./components/ui_components/titleBar.js";
 import { searchInput } from "./components/ui_components/searchInput.js";
 import { geocoding } from "./apiRouter.js";
 import "./style.css";
 
+// Build the static page shell once the app container is available.
 function initApp() {
   const app = document.getElementById("app");
 
@@ -37,11 +38,13 @@ function initApp() {
   app.appendChild(contentDiv);
 }
 
+// Wait for DOM load so `#app` exists before mounting components.
 document.addEventListener("DOMContentLoaded", () => {
   initApp();
 });
 
 const handleKeyInput = (event, inputElement) => {
+  // Submit the search when the user presses Enter in the input.
   if (event.key === "Enter") {
     const query = inputElement.value.trim();
     geocoding(query);
@@ -50,6 +53,7 @@ const handleKeyInput = (event, inputElement) => {
 };
 
 const handleButtonClick = (event, inputElement) => {
+  // Submit the search when the search button is clicked.
   const query = inputElement.value.trim();
   console.log(query);
   geocoding(query);

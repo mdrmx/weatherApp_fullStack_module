@@ -1,5 +1,6 @@
 import "./menu.css";
 
+// Toggle both the icon and panel visibility from a single click handler.
 function handleClick(event) {
   const menuBtn = event.currentTarget;
   const isHamburger = menuBtn.textContent === "\u2630";
@@ -21,6 +22,7 @@ export function menu({ menuConfig }) {
   menuPanel.className = menuConfig.menuStyle;
   menuPanel.style.display = "none";
 
+  // Render configured links into the panel.
   for (let item of menuConfig.menuItems) {
     const menuItem = document.createElement("a");
     menuItem.className = "menu-item";

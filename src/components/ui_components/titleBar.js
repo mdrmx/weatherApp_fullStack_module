@@ -1,6 +1,7 @@
-import { menu } from "./ui_components/menu.js";
+import { menu } from "./menu.js";
 import "./titleBar.css";
 
+// Compose the title bar and attach the configurable menu controls.
 export function initTitleBar({ title, searchBar = {}, menuConfig = {} }) {
   const titleDiv = document.createElement("div");
   titleDiv.id = "title-div";

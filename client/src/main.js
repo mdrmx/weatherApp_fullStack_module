@@ -2,6 +2,7 @@ import { initTitleBar } from "./components/ui_components/titleBar.js";
 import { searchInput } from "./components/ui_components/searchInput.js";
 import { weatherApi } from "./apiRouter.js";
 import "./style.css";
+import { dailyForecast } from "./components/ui_components/weatherTile.js";
 
 // Build the static page shell once the app container is available.
 function initApp() {
@@ -43,20 +44,20 @@ document.addEventListener("DOMContentLoaded", () => {
   initApp();
 });
 
-const handleKeyInput = (event, inputElement) => {
+const handleKeyInput = async (event, inputElement) => {
   // Submit the search when the user presses Enter in the input.
   if (event.key === "Enter") {
-    const query = inputElement.value.trim();
-    geocoding(query);
-    inputElement.value = "";
+    await handleButtonClick(event, inputElement);
   }
 };
 
-const handleButtonClick = (event, inputElement) => {
+const handleButtonClick = async (event, inputElement) => {
   // Submit the search when the search button is clicked.
   const query = inputElement.value.trim();
-  console.log(query);
+
   // geocoding(query);
-  weatherApi(query);
+  const weather = await weatherApi(query);
+  console.log(weather);
+  dailyForecast(weather.current, weather.daily);
   inputElement.value = "";
 };
